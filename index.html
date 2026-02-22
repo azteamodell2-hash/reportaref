@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -283,19 +283,6 @@
   </div>
 </div>
 
-<!-- FINAL GAG POPUP -->
-<div class="overlay" id="gagOverlay">
-  <div class="popup">
-    <h1>😂 Gotcha!</h1>
-    <p>
-      This is a gag site — no reports were submitted.<br><br>
-      Officiating is hard. Respect the refs. ❤️
-    </p>
-    <div class="btn-row">
-      <button class="cancel" onclick="closeGag()">Close</button>
-    </div>
-  </div>
-</div>
 
 <script>
   const form = document.getElementById("reportForm");
@@ -312,14 +299,49 @@
   }
 
   function finalSubmit() {
-    confirmOverlay.style.display = "none";
-    gagOverlay.style.display = "flex";
-  }
+  // Hide confirmation popup
+  confirmOverlay.style.display = "none";
 
+  const systemPopup = document.getElementById("systemPopup");
+
+  // Show the popup after a brief “installing” delay
+  setTimeout(() => {
+    systemPopup.style.display = "block";
+  }, 1000); // 1 second delay simulating processing
+}
+
+// Add functionality to close popup
+document.getElementById("systemOkButton").addEventListener("click", function() {
+  const systemPopup = document.getElementById("systemPopup");
+  systemPopup.style.display = "none";
+});
   function closeGag() {
     gagOverlay.style.display = "none";
   }
 </script>
+<!-- SYSTEM ALERT POPUP -->
+<div id="systemPopup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); 
+     width:360px; background:#f9f9f9; border:1px solid #ccc; border-radius:6px; box-shadow:0 5px 20px rgba(0,0,0,0.4);
+     z-index:9999; font-family:Arial, sans-serif;">
+  
+  <!-- Title bar -->
+  <div style="background:#e0e0e0; padding:8px 12px; border-bottom:1px solid #ccc; font-weight:bold; font-size:14px;">
+    Security Alert
+  </div>
 
+  <!-- Body -->
+  <div style="padding:16px; font-size:14px; line-height:1.4; color:#111;">
+    Your system has detected a critical security threat.<br><br>
+    Trojan malware has been installed and is actively compromising system files.<br>
+    Immediate action is required to prevent data loss.
+  </div>
+
+  <!-- Button -->
+  <div style="padding:12px; text-align:right; border-top:1px solid #ccc;">
+    <button id="systemOkButton" style="padding:6px 14px; background:#0078d4; color:white; border:none; border-radius:4px; cursor:pointer;">
+      OK
+    </button>
+  </div>
+</div>
 </body>
 </html>
