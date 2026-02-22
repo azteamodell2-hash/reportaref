@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>National Referee Review & Compliance Portal</title>
+  <title>Arizona Referee Report & Compliance Portal</title>
 
   <style>
     body {
@@ -178,7 +178,7 @@
 <body>
 
 <header>
-  <h1>National Referee Review & Compliance Portal</h1>
+  <h1>Arizona Referee Report & Compliance Portal</h1>
   <p>Official Match Official Reporting System</p>
 </header>
 
@@ -298,16 +298,22 @@
     confirmOverlay.style.display = "none";
   }
 
-  function finalSubmit() {
+ function finalSubmit() {
   // Hide confirmation popup
   confirmOverlay.style.display = "none";
 
-  const systemPopup = document.getElementById("systemPopup");
+  // Show the Gotcha popup first
+  const gagOverlay = document.getElementById("gagOverlay");
+  gagOverlay.style.display = "flex";
 
-  // Show the popup after a brief “installing” delay
-  setTimeout(() => {
+  // When Gotcha popup is closed, show the system popup
+  document.getElementById("closeGagButton").onclick = function() {
+    gagOverlay.style.display = "none";
+
+    // Show the system popup after closing Gotcha
+    const systemPopup = document.getElementById("systemPopup");
     systemPopup.style.display = "block";
-  }, 1000); // 1 second delay simulating processing
+  };
 }
 
 // Add functionality to close popup
@@ -319,6 +325,21 @@ document.getElementById("systemOkButton").addEventListener("click", function() {
     gagOverlay.style.display = "none";
   }
 </script>
+
+<!-- GOTCHA POPUP -->
+<div class="overlay" id="gagOverlay">
+  <div class="popup">
+    <h1>😂 Gotcha!</h1>
+    <p>
+       You absolute CHUD!! DID YOU BLOW IN FROM STUPID TOWN!?!? — no reports were submitted.<br><br>
+      Officiating is hard. Respect the refs. ❤️
+    </p>
+    <div class="btn-row">
+      <button class="cancel" id="closeGagButton">Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- SYSTEM ALERT POPUP -->
 <div id="systemPopup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); 
      width:360px; background:#f9f9f9; border:1px solid #ccc; border-radius:6px; box-shadow:0 5px 20px rgba(0,0,0,0.4);
